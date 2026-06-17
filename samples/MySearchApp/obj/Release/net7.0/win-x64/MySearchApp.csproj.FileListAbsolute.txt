@@ -1,0 +1,12 @@
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\MySearchApp.csproj.AssemblyReference.cache
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\Resources.Inputs.cache
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\resources
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\MySearchApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\MySearchApp.AssemblyInfoInputs.cache
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\MySearchApp.AssemblyInfo.cs
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\MySearchApp.csproj.CoreCompileInputs.cache
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\references
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\original.dll
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\original.pdb
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\Avalonia\original.ref.dll
+C:\Users\user\Downloads\Fluent-Search-main\samples\MySearchApp\obj\Release\net7.0\win-x64\refint\MySearchApp.dll
