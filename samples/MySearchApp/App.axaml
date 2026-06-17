@@ -4,6 +4,5 @@
              x:Class="MySearchApp.App">
   <Application.Styles>
     <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentTheme.xaml" />
-    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/BaseLight.xaml" />
   </Application.Styles>
 </Application>
