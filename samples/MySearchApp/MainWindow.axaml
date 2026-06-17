@@ -17,21 +17,29 @@
     </Grid.RowDefinitions>
 
     <!-- Top toolbar: center coords and zoom -->
-    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="8" Padding="8">
-      <TextBlock VerticalAlignment="Center" Text="Maps Demo" FontWeight="Bold" />
-      <TextBox Width="220" Watermark="Center coordinates (lat,lon)" Text="{Binding CenterCoordinates, Mode=TwoWay}" />
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-        <Button Content="Zoom +" Command="{Binding ZoomInCommand}" Margin="4,0" />
-        <Button Content="Zoom -" Command="{Binding ZoomOutCommand}" Margin="4,0" />
-        <Button Content="Open Map" Command="{Binding OpenMapCommand}" Margin="8,0" />
+    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Padding="8">
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <TextBlock VerticalAlignment="Center" Text="Maps Demo" FontWeight="Bold" />
+        <TextBox Width="220" Watermark="Center coordinates (lat,lon)" Text="{Binding CenterCoordinates, Mode=TwoWay}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <Button Content="Zoom +" Command="{Binding ZoomInCommand}" Margin="4,0" />
+          <Button Content="Zoom -" Command="{Binding ZoomOutCommand}" Margin="4,0" />
+          <Button Content="Open Map" Command="{Binding OpenMapCommand}" Margin="8,0" />
+        </StackPanel>
       </StackPanel>
-    </StackPanel>
+    </Border>
 
     <!-- Left: Layers / tools -->
     <Border Grid.Row="1" Grid.Column="0" Padding="8" BorderBrush="#22000000" BorderThickness="0,0,1,0">
       <StackPanel>
         <TextBlock Text="Layers" FontWeight="Bold" Margin="0,0,0,8" />
-        <ListBox Items="{Binding Layers}" SelectedItem="{Binding SelectedLayer}" DisplayMemberPath="Name" />
+        <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding SelectedLayer}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}" />
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
         <Button Content="Add Layer" Command="{Binding AddLayerCommand}" Margin="0,8,0,0" />
       </StackPanel>
     </Border>
