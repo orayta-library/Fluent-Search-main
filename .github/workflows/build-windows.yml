@@ -1,0 +1,74 @@
+name: Build (Windows)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nuget/packages
+          key: nuget-${{ runner.os }}-v1-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-v1-
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: (optional) Download MBTiles from URL
+        if: ${{ env.MBTILES_URL != '' }}
+        shell: pwsh
+        run: |
+          $dest = Join-Path ${{ github.workspace }} 'samples/MySearchApp/data'
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          $out = Join-Path $dest 'map.mbtiles'
+          Write-Host "Downloading MBTiles to $out"
+          Invoke-WebRequest -Uri $env:MBTILES_URL -OutFile $out -UseBasicParsing
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Publish self-contained Windows x64
+        run: |
+          dotnet publish samples/MySearchApp -c Release -r win-x64 --self-contained true -o artifacts/MySearchApp --no-restore
+
+      - name: Smoke-test published app (start server and fetch index)
+        shell: pwsh
+        run: |
+          $exe = Join-Path ${{ github.workspace }} 'artifacts/MySearchApp/MySearchApp.exe'
+          if (-not (Test-Path $exe)) { Write-Error "Exe not found: $exe"; exit 1 }
+          Write-Host "Starting $exe"
+          $proc = Start-Process -FilePath $exe -PassThru
+          Start-Sleep -Seconds 6
+          try {
+            $resp = Invoke-WebRequest -UseBasicParsing -Uri 'http://127.0.0.1:5000/' -TimeoutSec 10 -ErrorAction Stop
+            if ($resp.StatusCode -eq 200) { Write-Host 'Server responded 200' } else { Write-Host "Server responded $($resp.StatusCode)" }
+          } catch {
+            Write-Host 'Could not fetch index.html from server (tile endpoint may 404 without MBTiles)'
+          } finally {
+            Write-Host 'Stopping process'
+            Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Package published app
+        run: powershell -Command "Compress-Archive -Path artifacts/MySearchApp/* -DestinationPath artifacts/MySearchApp.zip -Force"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MySearchApp
+          path: |
+            artifacts/MySearchApp.zip

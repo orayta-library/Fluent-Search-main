@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.0-rc1" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-rc1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.1.11" />
+  </ItemGroup>
+
+</Project>
