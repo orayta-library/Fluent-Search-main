@@ -38,7 +38,8 @@ jobs:
           Write-Host "Downloading MBTiles to $out"
           Invoke-WebRequest -Uri $env:MBTILES_URL -OutFile $out -UseBasicParsing
 
-      - name: Restore
+      - name: Restore (sample project)
+        working-directory: samples/MySearchApp
         run: dotnet restore
 
       - name: Publish self-contained Windows x64
