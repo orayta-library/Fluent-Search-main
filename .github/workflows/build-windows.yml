@@ -44,7 +44,7 @@ jobs:
 
       - name: Publish self-contained Windows x64
         run: |
-          dotnet publish samples/MySearchApp -c Release -r win-x64 --self-contained true -o artifacts/MySearchApp --no-restore
+          dotnet publish samples/MySearchApp -c Release -r win-x64 --self-contained true -o artifacts/MySearchApp
 
       - name: Smoke-test published app (start server and fetch index)
         shell: pwsh
